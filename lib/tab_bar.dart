@@ -18,6 +18,7 @@ class _MainTabbarPageState extends State<MainTabbarPage> {
     const Family(),
     const Friends(),
     const Cruch(),
+    const Cruch(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -25,79 +26,121 @@ class _MainTabbarPageState extends State<MainTabbarPage> {
       length: pages.length,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            "Saminom don",
-            style: TextStyle(
-              color: Color(0xff7E14AF),
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.circle_outlined),
-            color: const Color(0xff7E14AF),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.menu),
-              color: const Color(0xff7E14AF),
-            ),
-          ],
-          bottom: TabBar(
-            onTap: (value) {
+        appBar: MyCustomAppBar(
+          onChange: (value) {
+            setState(() {
               currentPage = value;
-              setState(() {});
-            },
-            tabs: [
-              Container(
-                alignment: Alignment.center,
-                height: 30,
-                child: const Text(
-                  "MyImage",
-                  style: TextStyle(
-                    color: Color(0xff7E14AF),
-                  ),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 30,
-                child: const Text(
-                  "Family",
-                  style: TextStyle(
-                    color: Color(0xff7E14AF),
-                  ),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 30,
-                child: const Text(
-                  "Friends",
-                  style: TextStyle(
-                    color: Color(0xff7E14AF),
-                  ),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 30,
-                child: const Text(
-                  "Curch",
-                  style: TextStyle(
-                    color: Color(0xff7E14AF),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            });
+          },
         ),
         body: pages[currentPage],
       ),
     );
   }
+}
+
+class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final Function(int) onChange;
+  const MyCustomAppBar({super.key, required this.onChange});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [Icon(Icons.circle_outlined), Icon(Icons.menu)],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "samuel joseph",
+              style: TextStyle(
+                fontSize: 20,
+                color: Color(0xff8439B3),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TabBar(
+              isScrollable: true,
+              onTap: (value) {
+                onChange.call(value);
+              },
+              labelColor: Colors.white,
+              unselectedLabelColor: Color(0xff8439B3),
+              indicator: BoxDecoration(
+                color: Color(0xff8439B3),
+                borderRadius: BorderRadius.circular(15)
+              ),
+              tabs: [
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: const Text(
+                    "MyImage",
+                    style: TextStyle(
+                      // color: Color(0xff7E14AF),
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: const Text(
+                    "Family",
+                    style: TextStyle(
+                      // color: Color(0xff7E14AF),
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: const Text(
+                    "Friends",
+                    style: TextStyle(
+                      // color: Color(0xff7E14AF),
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: const Text(
+                    "Curch",
+                    style: TextStyle(
+                      // color: Color(0xff7E14AF),
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: const Text(
+                    "Mosque",
+                    style: TextStyle(
+                      // color: Color(0xff7E14AF),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size(double.infinity, 110);
 }

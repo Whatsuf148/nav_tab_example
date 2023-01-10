@@ -11,22 +11,22 @@ class MyImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xff7E14AF),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: img.length,
-              shrinkWrap: true,
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Container(
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: const Color(0xffC29ED9),
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: img.length,
+            shrinkWrap: true,
+            itemBuilder: ((context, index) {
+              return Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
                     clipBehavior: Clip.hardEdge,
                     height: 170,
                     width: 370,
@@ -34,23 +34,19 @@ class MyImage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(45),
                     ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Straight Face\n Dad",
-                          ),
-                          Image.asset(
-                            img[index],
-                            height: 900,
-                            width: 200,
-                            fit: BoxFit.fitHeight,
-                          )
-                        ]),
+                    child: const Text(
+                      "Straight Face\n Dad",
+                    ),
                   ),
-                );
-              })),
-        ],
+                  Image.asset(
+                    img[index],
+                    height: 190,
+                    width: 190,
+                    fit: BoxFit.fitWidth,
+                  )
+                ],
+              );
+            })),
       ),
     );
   }
